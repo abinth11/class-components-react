@@ -67,6 +67,17 @@ Functional components are simpler than class-based components and do not have li
 
 - `useEffect()`: This hook is used to perform cleanup tasks when the component is about to be removed from the DOM.
 
+#### Summary
+
+Prior to the introduction of functional components in React, class-based components were the primary way of building complex user interfaces. While class components provided a robust set of lifecycle methods for developers to work with, they could also be difficult to understand and manage.
+
+With the introduction of functional components, React developers gained a simpler and more intuitive way to build UI components. Functional components provided a clear separation of concerns, made state management easier, and simplified the overall development process.
+
+Functional components achieved this by removing many of the complexities of class-based components. In functional components, lifecycle methods are replaced with hooks, which are simpler and more flexible. The `useState` hook provides a simpler way to manage state, while the `useEffect` hook allows developers to handle side effects in a more intuitive way.
+
+Overall, the introduction of functional components has made building React applications more accessible to developers of all skill levels, while also providing a more streamlined and efficient development experience.
+
+
 ## How to Use This Repository
 
 You can use this repository as a reference guide to help you better understand and work with class-based components in React. Each section of this repository focuses on a specific challenge that developers face when using class-based components, and provides examples and solutions to overcome these challenges.
