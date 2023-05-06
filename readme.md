@@ -67,6 +67,76 @@ Functional components are simpler than class-based components and do not have li
 
 - `useEffect()`: This hook is used to perform cleanup tasks when the component is about to be removed from the DOM.
 
+
+#### Important points to remember..!
+
+#### why props is passed to `constructor()` and `super()`
+// In a class-based component, the `constructor` method is called when the component is first initialized. It is used to initialize the component's state and bind event handlers. 
+
+// In the example below, the `constructor` method is used to initialize the `state` object with a `name` and `age` property.
+
+```
+constructor(props) {
+    console.log('constructor')
+    super(props)
+    this.state = {
+        name: "Naruto",
+        age: 21
+    }
+}
+```
+// When the `constructor` method is called, it is passed a `props` parameter. In order to use `props` in the `constructor`, it must be passed to the `super` method. This is because the `super` method is used to call the constructor of the parent class (in this case, the `Component` class). The `props` parameter is required in order to initialize the parent class correctly.
+
+// By calling `super(props)`, we are passing the `props` parameter to the parent class constructor. This allows us to access `props` in the `constructor`.
+
+// In summary, we pass `props` to the `constructor` and `super` methods in order to use `props` in the `constructor` and to ensure that the parent class constructor is called correctly.
+
+// The `props` parameter is an object that contains any properties passed to the component when it is rendered. These properties can be accessed in the component using `this.props`. By passing `props` to the `constructor` and `super` methods, we are able to access these properties in the `constructor` and initialize the component's state based on the properties passed to it.
+
+// Additionally, passing `props` to the `super` method ensures that the parent class constructor is called correctly, which is necessary for the component to function properly. If `props` were not passed to the `super` method, the parent class constructor would not be initialized correctly and the component would not work as expected.
+
+// It's worth noting that in functional components, `props` are not passed to a constructor method because there is no constructor method. Instead, `props` are passed directly as an argument to the functional component. This is one of the benefits of using functional components - they are simpler and easier to understand than class-based components.
+
+#### Why `componentDidMount()` can be made async, but not `useEffect()`
+// In a class-based component, the `componentDidMount` lifecycle method is used to make API calls or perform other asynchronous operations after the component has been mounted.
+
+class MyComponent extends React.Component {
+  async componentDidMount() {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    this.setState({ data });
+  }
+
+  render() {
+    return <div>{this.state.data}</div>;
+  }
+}
+
+// In the example above, `componentDidMount` is made `async` in order to use the `await` keyword to wait for the API response before updating the component's state. This is a common pattern in React applications.
+
+// On the other hand, in a function-based component, the `useEffect` hook is used to perform side effects after the component has rendered. The `useEffect` hook takes a callback function that can be made `async`, but it is not recommended.
+
+function MyComponent() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('https://api.example.com/data');
+      const data = await response.json();
+      setData(data);
+    }
+
+    fetchData();
+  }, []);
+
+  return <div>{data}</div>;
+}
+
+// In the example above, the `fetchData` function is made `async` in order to use the `await` keyword to wait for the API response before updating the component's state. However, the callback function passed to `useEffect` cannot be made `async`, so `fetchData` is defined inside the callback function and then immediately called.
+
+// This is because `useEffect` is called after the component has rendered, so any asynchronous operations it performs should not block the rendering of the component. Defining the callback function inside `useEffect` and then immediately calling it ensures that the rendering of the component is not blocked.
+
+
 #### Summary
 
 Prior to the introduction of functional components in React, class-based components were the primary way of building complex user interfaces. While class components provided a robust set of lifecycle methods for developers to work with, they could also be difficult to understand and manage.
@@ -91,5 +161,3 @@ If you have faced any challenges when working with class-based components in Rea
 
 - Fork this repository and make your changes on a new branch.
 - Submit a pull request with a clear explanation of the changes you've made and why they are valuable.
-
-## License
