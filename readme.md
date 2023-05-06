@@ -99,7 +99,7 @@ constructor(props) {
 
 #### Why `componentDidMount()` can be made async, but not `useEffect()`
 // In a class-based component, the `componentDidMount` lifecycle method is used to make API calls or perform other asynchronous operations after the component has been mounted.
-
+```
 class MyComponent extends React.Component {
   async componentDidMount() {
     const response = await fetch('https://api.example.com/data');
@@ -111,11 +111,11 @@ class MyComponent extends React.Component {
     return <div>{this.state.data}</div>;
   }
 }
-
+```
 // In the example above, `componentDidMount` is made `async` in order to use the `await` keyword to wait for the API response before updating the component's state. This is a common pattern in React applications.
 
 // On the other hand, in a function-based component, the `useEffect` hook is used to perform side effects after the component has rendered. The `useEffect` hook takes a callback function that can be made `async`, but it is not recommended.
-
+```
 function MyComponent() {
   const [data, setData] = useState(null);
 
@@ -131,7 +131,7 @@ function MyComponent() {
 
   return <div>{data}</div>;
 }
-
+```
 // In the example above, the `fetchData` function is made `async` in order to use the `await` keyword to wait for the API response before updating the component's state. However, the callback function passed to `useEffect` cannot be made `async`, so `fetchData` is defined inside the callback function and then immediately called.
 
 // This is because `useEffect` is called after the component has rendered, so any asynchronous operations it performs should not block the rendering of the component. Defining the callback function inside `useEffect` and then immediately calling it ensures that the rendering of the component is not blocked.
