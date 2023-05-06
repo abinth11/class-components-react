@@ -10,7 +10,7 @@ class ClassComponent extends Component {
     }
    async componentDidMount(){
       const userData =  await fetch('https://api.github.com/users/abinth11')
-      const parsedUserData = 
+      const parsedUserData = await userData.json()
       console.log(parsedUserData)
       console.log('class component mounted')
     }
